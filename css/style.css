@@ -3,3 +3,64 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.container{
+    height: 100vh;
+    background-color: #564d4d;
+}
+
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: black;
+    height: 80px;
+}
+
+h1{
+    color: 	#db0000;
+    font-size: 50px;
+}
+
+#search__sect{
+    color: white;
+}
+
+#catalogue__sect{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    overflow-x: auto;
+}
+
+.film__card{
+    position: relative;
+    height:350px;
+}
+
+.film__card:hover .film__data{
+    opacity: 1;
+}
+
+.cards{
+    height: 100%;
+}
+
+.film__img{
+    opacity: 1;
+}
+
+.cards img{
+    height:100%;
+}
+
+.film__data{
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    opacity: 0;
+}

@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BoolFix</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
         <!-- development version, includes helpful console warnings -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
@@ -12,8 +13,49 @@
     </head>
     <body>
         <div id="app">
+            <div class="container">
 
-            
+                <header>
+                    <h1>
+                        BOOLFIX
+                    </h1>
+                    <div id="search__sect">
+                        <label for="search">Search</label>
+                        <input v-model="searched"id="search" type="text">
+                        <button>Go!</button>
+                    </div>
+                </header>
+
+                <main>
+                    <div id="catalogue__sect">
+                        <div class="film__card">
+
+                            <div class="film__img cards">
+                                <img src="https://image.tmdb.org/t/p/w400/1J1e8Uslw8MAE7mIVFh6TU9mPt8.jpg" alt="">
+                            </div>
+
+                            <div class="film__data cards">
+                                <h3><strong>titolo: </strong></h3>
+                                <h4><strong>Titolo originale: </strong> </h4>
+                                <div class="voto">
+                                    <h4><strong>Voto: </strong></h4>
+                                    <ul>
+                                        <li>st</li>
+                                        <li>st</li>
+                                        <li>st</li>
+                                        <li>st</li>
+                                        <li>st</li>
+                                    </ul>
+                                </div>
+                                
+                                <h4>Overview: </h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </main>
+            </div>
         </div>
         <script src="js/script.js"></script>
     </body>
