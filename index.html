@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BoolFix</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
         <!-- development version, includes helpful console warnings -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -40,11 +41,8 @@
                                 <div class="voto">
                                     <h4><strong>Voto: </strong></h4>
                                     <ul>
-                                        <li>st</li>
-                                        <li>st</li>
-                                        <li>st</li>
-                                        <li>st</li>
-                                        <li>st</li>
+                                        <li v-for="index in film.vote_average"><i class="fas fa-star"></i></li>
+                                        <li v-for="index in (5 - film.vote_average)"><i class="far fa-star"></i></li>
                                     </ul>
                                 </div>
                                 <div :class="showOverview" @click="show" class="overview" >

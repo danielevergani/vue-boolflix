@@ -3,7 +3,8 @@ var app = new Vue({
     data: {
         films: [],
         searched: "" ,
-        showOverview: "overview__clamp"
+        showOverview: "overview__clamp",
+        vote: ""
     }, 
     methods: {
         search: function(){
@@ -15,7 +16,8 @@ var app = new Vue({
             })
             .then((results) => {
                 console.log(results.data.results);
-                this.films = results.data.results
+                this.films = results.data.results;
+                this.voteModify()
             });
             
         },
@@ -30,6 +32,11 @@ var app = new Vue({
         },
         resetOverview: function(){
             this.showOverview = "overview__clamp"
+        },
+        voteModify: function(){
+            this.films.forEach(element => {
+                element.vote_average = Math.ceil(element.vote_average / 2);
+            });
         }
 
     }
