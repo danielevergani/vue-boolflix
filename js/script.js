@@ -4,7 +4,7 @@ var app = new Vue({
         films: [],
         searched: "" ,
         showOverview: "overview__clamp",
-        vote: ""
+        vote: "",
     }, 
     methods: {
         search: function(){
@@ -17,7 +17,8 @@ var app = new Vue({
             .then((results) => {
                 console.log(results.data.results);
                 this.films = results.data.results;
-                this.voteModify()
+                this.voteModify();
+                this.overviewNotAvailable();
             });
             
         },
@@ -32,6 +33,13 @@ var app = new Vue({
         },
         resetOverview: function(){
             this.showOverview = "overview__clamp"
+        },
+        overviewNotAvailable: function(){
+            this.films.forEach(element => {
+                if(element.overview == ""){
+                    element.overview = "Descrizione non disponibile"
+                }
+            });
         },
         voteModify: function(){
             this.films.forEach(element => {

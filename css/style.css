@@ -41,6 +41,7 @@ h1{
 .film__card{
     position: relative;
     height:350px;
+    min-width: 233px;
 }
 
 .film__card:not(:last-child){
@@ -56,11 +57,13 @@ h1{
 }
 
 .film__img{
+    width: 100%;
     opacity: 1;
 }
 
 .cards img{
     height:100%;
+    width: 100%;
 }
 
 .film__data{
