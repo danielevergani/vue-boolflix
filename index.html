@@ -36,8 +36,9 @@
                             </div>
 
                             <div class="film__data cards">
-                                <h3><strong>titolo: {{film.title}}</strong></h3>
-                                <h4><strong>Titolo originale: {{film.original_title}}</strong> </h4>
+                                <h3><strong>Titolo:</strong> {{film.title}}</h3>
+                                <h4><strong>Titolo originale:</strong> {{film.original_title}}</h4>
+                                <h4><strong>Lingua:</strong> {{film.original_language}}</h4>
                                 <div class="voto">
                                     <h4><strong>Voto: </strong></h4>
                                     <ul>
@@ -46,7 +47,7 @@
                                     </ul>
                                 </div>
                                 <div :class="showOverview" @click="show" class="overview" >
-                                    <h4>Overview: <span>{{film.overview}}</span> </h4>
+                                    <h4> <strong>Overview: </strong> <span>{{film.overview}}</span> </h4>
                             
                                 </div>
                                 
