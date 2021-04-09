@@ -21,22 +21,22 @@
                     </h1>
                     <div id="search__sect">
                         <label for="search">Search</label>
-                        <input v-model="searched"id="search" type="text">
-                        <button>Go!</button>
+                        <input @keyup.13="search" v-model="searched"id="search" type="text">
+                        <button @click="search" >Go!</button>
                     </div>
                 </header>
 
                 <main>
-                    <div id="catalogue__sect">
-                        <div class="film__card">
+                    <div v-dragscroll id="catalogue__sect">
+                        <div v-for="film in films" class="film__card">
 
                             <div class="film__img cards">
-                                <img src="https://image.tmdb.org/t/p/w400/1J1e8Uslw8MAE7mIVFh6TU9mPt8.jpg" alt="">
+                                <img :src='"https://image.tmdb.org/t/p/w400/" + film.poster_path' alt="">
                             </div>
 
                             <div class="film__data cards">
-                                <h3><strong>titolo: </strong></h3>
-                                <h4><strong>Titolo originale: </strong> </h4>
+                                <h3><strong>titolo: {{film.title}}</strong></h3>
+                                <h4><strong>Titolo originale: {{film.original_title}}</strong> </h4>
                                 <div class="voto">
                                     <h4><strong>Voto: </strong></h4>
                                     <ul>
@@ -47,8 +47,11 @@
                                         <li>st</li>
                                     </ul>
                                 </div>
+                                <div :class="showOverview" @click="show" class="overview" >
+                                    <h4>Overview: <span>{{film.overview}}</span> </h4>
+                            
+                                </div>
                                 
-                                <h4>Overview: </h4>
                             </div>
                         </div>
 
@@ -57,6 +60,8 @@
                 </main>
             </div>
         </div>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vue-dragscroll"></script>
         <script src="js/script.js"></script>
     </body>
 </html>

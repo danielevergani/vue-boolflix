@@ -34,9 +34,17 @@ h1{
     overflow-x: auto;
 }
 
+#catalogue__sect::-webkit-scrollbar {
+    display: none;
+  }
+
 .film__card{
     position: relative;
     height:350px;
+}
+
+.film__card:not(:last-child){
+    margin-right: 5px;
 }
 
 .film__card:hover .film__data{
@@ -60,7 +68,29 @@ h1{
     top: 0;
     z-index: 0;
     width: 100%;
+    padding:7px;
     background-color: black;
     color: white;
     opacity: 0;
+    overflow: hidden;
+}
+
+.voto{
+    display: flex;
+}
+
+.voto ul{
+    display: flex;
+    list-style: none;
+}
+
+.overview{
+    cursor: pointer;
+}
+
+.overview__clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
