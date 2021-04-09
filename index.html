@@ -28,7 +28,7 @@
 
                 <main>
                     <div v-dragscroll id="catalogue__sect">
-                        <div v-for="film in films" class="film__card">
+                        <div @mouseleave="resetOverview" v-for="film in films" class="film__card">
 
                             <div class="film__img cards">
                                 <img :src='"https://image.tmdb.org/t/p/w400/" + film.poster_path' alt="">

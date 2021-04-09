@@ -21,13 +21,17 @@ var app = new Vue({
         },
         show: function(){
             if(this.showOverview == "overview__clamp"){
-                this.showOverview = ""
+                this.showOverview = "overview__open"
             }
             else{
                 this.showOverview = "overview__clamp"
             }
             
+        },
+        resetOverview: function(){
+            this.showOverview = "overview__clamp"
         }
+
     }
     
 })
