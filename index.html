@@ -7,7 +7,9 @@
         <title>BoolFix</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
-        <!-- development version, includes helpful console warnings -->
+        <!-- https://github.com/lipis/flag-icon-css?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" />
+        <!-- development version, includes helpful console warnings --> 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/style.css">
@@ -29,16 +31,17 @@
 
                 <main>
                     <div v-dragscroll id="catalogue__sect">
-                        <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null"class="film__card">
+                        <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
 
                             <div class="film__img cards">
                                 <img :src='"https://image.tmdb.org/t/p/w400/" + film.poster_path' alt="">
                             </div>
 
                             <div class="film__data cards">
-                                <h3><strong>Titolo:</strong> {{film.title}}</h3>
-                                <h4><strong>Titolo originale:</strong> {{film.original_title}}</h4>
+                                <h3><strong>Titolo:</strong> {{film.title || film.name}}</h3>
+                                <h4><strong>Titolo originale:</strong> {{film.original_title || film.original_name}}</h4>
                                 <h4><strong>Lingua:</strong> {{film.original_language}}</h4>
+                                
                                 <div class="voto">
                                     <h4><strong>Voto: </strong></h4>
                                     <ul>

@@ -2,9 +2,11 @@ var app = new Vue({
     el: "#app",
     data: {
         films: [],
+        series:[],
         searched: "" ,
         showOverview: "overview__clamp",
         vote: "",
+        flagClass:'flag-icon flag-icon- + film.original_language'
     }, 
     methods: {
         search: function(){
@@ -15,11 +17,27 @@ var app = new Vue({
                 }
             })
             .then((results) => {
-                console.log(results.data.results);
                 this.films = results.data.results;
+                // console.log(this.films);
                 this.voteModify();
                 this.overviewNotAvailable();
             });
+            axios.get("https://api.themoviedb.org/3/search/tv?api_key=56e179e57d4a7222dddc19a32b9ea0ee", {
+                params:{
+                    query: this.searched,
+                    language: "it-IT"
+                }
+            })
+            .then((results) => {
+                this.series = results.data.results;
+                this.series.forEach(element => {
+                    this.films.push(element)
+                });
+                console.log(this.films);
+                this.voteModify();
+                this.overviewNotAvailable();
+            });
+
             
         },
         show: function(){
