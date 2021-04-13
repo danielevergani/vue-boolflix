@@ -6,9 +6,9 @@ var app = new Vue({
         series:[],
         searched: "" ,
         showOverview: "overview__clamp",
-        allActive: "",
-        filmsActive: "",
-        seriesActive: "",
+        allActive: false,
+        filmActive: false,
+        seriesActive: false
     }, 
     methods: {
         search: function(){
@@ -68,9 +68,45 @@ var app = new Vue({
                 element.vote_average = Math.ceil(element.vote_average / 2);
             });
         },
-        giveClass: function(e){
-            e.target
+        showSection: function(element){
+
+            element.target.classList.toggle('active');
+
+            if ( element.target.innerHTML == "all" ) {
+                if( element.target.classList =="active"){
+                    this.allActive = true
+                    console.log(this.allActive);
+                }
+                else{
+                    this.allActive = false;
+                    console.log(this.allActive);
+                }
+            }
+            else if ( element.target.innerHTML == "films" ) {
+                if( element.target.classList =="active"){
+                    this.filmActive = true
+                    console.log(this.filmActive);
+                }
+                else{
+                    this.filmActive = false;
+                    console.log(this.filmActive);
+                }
+            } 
+            else{
+                if( element.target.classList =="active"){
+                    this.seriesActive = true
+                    console.log(this.seriesActive);
+                }
+                else{
+                    this.seriesActive = false;
+                    console.log(this.seriesActive);
+                }
+            }
+
+            
+            
         }
+        
 
     }
     

@@ -21,9 +21,9 @@
                         BOOLFIX
                     </h1>
                     <div class="selector">
-                        <button class="" @click="$event.target.classList.toggle('active')">all</button>
-                        <button :class="filmsActive" @click="$event.target.classList.toggle('active')">films</button>
-                        <button :class="seriesActive" @click="$event.target.classList.toggle('active')">series</button>
+                        <button class="" @click="showSection">all</button>
+                        <button class="" @click="showSection">films</button>
+                        <button class="" @click="showSection">series</button>
                     </div>
                     <div id="search__sect">
                         <label for="search">Search</label>
@@ -33,88 +33,94 @@
                 </header>
 
                 <main>
-                    <div v-dragscroll id="catalogue__sect">
-                        <div @mouseleave="resetOverview" v-for="item in mix" v-if="item.poster_path !== null" class="film__card">
+                    <div class="all" v-if="allActive">
+                        <div v-dragscroll id="catalogue__sect">
+                            <div @mouseleave="resetOverview" v-for="item in mix" v-if="item.poster_path !== null" class="film__card">
 
-                            <div class="film__img cards">
-                                <img :src='"https://image.tmdb.org/t/p/w400/" + item.poster_path' alt="">
-                            </div>
+                                <div class="film__img cards">
+                                    <img :src='"https://image.tmdb.org/t/p/w400/" + item.poster_path' alt="">
+                                </div>
 
-                            <div class="film__data cards">
-                                <h3><strong>Titolo:</strong> {{item.title || item.name}}</h3>
-                                <h4><strong>Titolo originale:</strong> {{item.original_title || item.original_name}}</h4>
-                                <h4><strong>Lingua:</strong> {{item.original_language}}</h4>
-                                <div class="voto">
-                                    <h4><strong>Voto: </strong></h4>
-                                    <ul>
-                                        <li v-for="index in item.vote_average"><i class="fas fa-star"></i></li>
-                                        <li v-for="index in (5 - item.vote_average)"><i class="far fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <div :class="showOverview" @click="show" class="overview" >
-                                    <h4> <strong>Overview: </strong> <span>{{item.overview}}</span> </h4>
-                            
-                                </div>
+                                <div class="film__data cards">
+                                    <h3><strong>Titolo:</strong> {{item.title || item.name}}</h3>
+                                    <h4><strong>Titolo originale:</strong> {{item.original_title || item.original_name}}</h4>
+                                    <h4><strong>Lingua:</strong> {{item.original_language}}</h4>
+                                    <div class="voto">
+                                        <h4><strong>Voto: </strong></h4>
+                                        <ul>
+                                            <li v-for="index in item.vote_average"><i class="fas fa-star"></i></li>
+                                            <li v-for="index in (5 - item.vote_average)"><i class="far fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div :class="showOverview" @click="show" class="overview" >
+                                        <h4> <strong>Overview: </strong> <span>{{item.overview}}</span> </h4>
                                 
+                                    </div>
+                                    
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
 
-                    <div v-dragscroll id="catalogue__sect">
-                        <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
+                    <div class="films" v-if="filmActive">
+                        <div v-dragscroll id="catalogue__sect">
+                            <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
 
-                            <div class="film__img cards">
-                                <img :src='"https://image.tmdb.org/t/p/w400/" + film.poster_path' alt="">
-                            </div>
+                                <div class="film__img cards">
+                                    <img :src='"https://image.tmdb.org/t/p/w400/" + film.poster_path' alt="">
+                                </div>
 
-                            <div class="film__data cards">
-                                <h3><strong>Titolo:</strong> {{film.title || film.name}}</h3>
-                                <h4><strong>Titolo originale:</strong> {{film.original_title || film.original_name}}</h4>
-                                <h4><strong>Lingua:</strong> {{film.original_language}}</h4>
-                                <div class="voto">
-                                    <h4><strong>Voto: </strong></h4>
-                                    <ul>
-                                        <li v-for="index in film.vote_average"><i class="fas fa-star"></i></li>
-                                        <li v-for="index in (5 - film.vote_average)"><i class="far fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <div :class="showOverview" @click="show" class="overview" >
-                                    <h4> <strong>Overview: </strong> <span>{{film.overview}}</span> </h4>
-                            
-                                </div>
+                                <div class="film__data cards">
+                                    <h3><strong>Titolo:</strong> {{film.title || film.name}}</h3>
+                                    <h4><strong>Titolo originale:</strong> {{film.original_title || film.original_name}}</h4>
+                                    <h4><strong>Lingua:</strong> {{film.original_language}}</h4>
+                                    <div class="voto">
+                                        <h4><strong>Voto: </strong></h4>
+                                        <ul>
+                                            <li v-for="index in film.vote_average"><i class="fas fa-star"></i></li>
+                                            <li v-for="index in (5 - film.vote_average)"><i class="far fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div :class="showOverview" @click="show" class="overview" >
+                                        <h4> <strong>Overview: </strong> <span>{{film.overview}}</span> </h4>
                                 
+                                    </div>
+                                    
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
 
-                    <div v-dragscroll id="catalogue__sect">
-                        <div @mouseleave="resetOverview" v-for="serie in series" v-if="serie.poster_path !== null" class="film__card">
+                    <div class="series" v-if="seriesActive">
+                        <div v-dragscroll id="catalogue__sect">
+                            <div @mouseleave="resetOverview" v-for="serie in series" v-if="serie.poster_path !== null" class="film__card">
 
-                            <div class="film__img cards">
-                                <img :src='"https://image.tmdb.org/t/p/w400/" + serie.poster_path' alt="">
-                            </div>
+                                <div class="film__img cards">
+                                    <img :src='"https://image.tmdb.org/t/p/w400/" + serie.poster_path' alt="">
+                                </div>
 
-                            <div class="film__data cards">
-                                <h3><strong>Titolo:</strong> {{serie.title || serie.name}}</h3>
-                                <h4><strong>Titolo originale:</strong> {{serie.original_title || serie.original_name}}</h4>
-                                <h4><strong>Lingua:</strong> {{serie.original_language}}</h4>
-                                <div class="voto">
-                                    <h4><strong>Voto: </strong></h4>
-                                    <ul>
-                                        <li v-for="index in serie.vote_average"><i class="fas fa-star"></i></li>
-                                        <li v-for="index in (5 - serie.vote_average)"><i class="far fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <div :class="showOverview" @click="show" class="overview" >
-                                    <h4> <strong>Overview: </strong> <span>{{serie.overview}}</span> </h4>
-                            
-                                </div>
+                                <div class="film__data cards">
+                                    <h3><strong>Titolo:</strong> {{serie.title || serie.name}}</h3>
+                                    <h4><strong>Titolo originale:</strong> {{serie.original_title || serie.original_name}}</h4>
+                                    <h4><strong>Lingua:</strong> {{serie.original_language}}</h4>
+                                    <div class="voto">
+                                        <h4><strong>Voto: </strong></h4>
+                                        <ul>
+                                            <li v-for="index in serie.vote_average"><i class="fas fa-star"></i></li>
+                                            <li v-for="index in (5 - serie.vote_average)"><i class="far fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div :class="showOverview" @click="show" class="overview" >
+                                        <h4> <strong>Overview: </strong> <span>{{serie.overview}}</span> </h4>
                                 
+                                    </div>
+                                    
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
 
                 </main>
