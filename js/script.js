@@ -8,10 +8,12 @@ var app = new Vue({
         showOverview: "overview__clamp",
         allActive: false,
         filmActive: false,
-        seriesActive: false
+        seriesActive: false,
+        flag:['en', 'it']
     }, 
     methods: {
         search: function(){
+            this.mix = [];
             axios.get("https://api.themoviedb.org/3/search/movie?api_key=56e179e57d4a7222dddc19a32b9ea0ee", {
                 params:{
                     query: this.searched,
