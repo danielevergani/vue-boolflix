@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+*:focus{
+    outline: none;
+}
+
 .container{
     height: 100vh;
     background-color: #564d4d;
@@ -22,8 +26,25 @@ h1{
     font-size: 50px;
 }
 
+.selector button{
+    background-color: grey;
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    padding: 5px 10px;
+}
+
+.selector button.active{
+    background-color: #db0000;
+}
+
 #search__sect{
     color: white;
+}
+
+main{
+    height: calc(100% - 80px);
+    overflow: auto;
 }
 
 #catalogue__sect{

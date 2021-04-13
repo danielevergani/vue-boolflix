@@ -7,8 +7,6 @@
         <title>BoolFix</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
-        <!-- https://github.com/lipis/flag-icon-css?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" />
         <!-- development version, includes helpful console warnings --> 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
@@ -22,6 +20,11 @@
                     <h1>
                         BOOLFIX
                     </h1>
+                    <div class="selector">
+                        <button class="" @click="$event.target.classList.toggle('active')">all</button>
+                        <button :class="filmsActive" @click="$event.target.classList.toggle('active')">films</button>
+                        <button :class="seriesActive" @click="$event.target.classList.toggle('active')">series</button>
+                    </div>
                     <div id="search__sect">
                         <label for="search">Search</label>
                         <input @keyup.13="search" v-model="searched"id="search" type="text">
@@ -30,6 +33,34 @@
                 </header>
 
                 <main>
+                    <div v-dragscroll id="catalogue__sect">
+                        <div @mouseleave="resetOverview" v-for="item in mix" v-if="item.poster_path !== null" class="film__card">
+
+                            <div class="film__img cards">
+                                <img :src='"https://image.tmdb.org/t/p/w400/" + item.poster_path' alt="">
+                            </div>
+
+                            <div class="film__data cards">
+                                <h3><strong>Titolo:</strong> {{item.title || item.name}}</h3>
+                                <h4><strong>Titolo originale:</strong> {{item.original_title || item.original_name}}</h4>
+                                <h4><strong>Lingua:</strong> {{item.original_language}}</h4>
+                                <div class="voto">
+                                    <h4><strong>Voto: </strong></h4>
+                                    <ul>
+                                        <li v-for="index in item.vote_average"><i class="fas fa-star"></i></li>
+                                        <li v-for="index in (5 - item.vote_average)"><i class="far fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div :class="showOverview" @click="show" class="overview" >
+                                    <h4> <strong>Overview: </strong> <span>{{item.overview}}</span> </h4>
+                            
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
                     <div v-dragscroll id="catalogue__sect">
                         <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
 
@@ -41,7 +72,6 @@
                                 <h3><strong>Titolo:</strong> {{film.title || film.name}}</h3>
                                 <h4><strong>Titolo originale:</strong> {{film.original_title || film.original_name}}</h4>
                                 <h4><strong>Lingua:</strong> {{film.original_language}}</h4>
-                                
                                 <div class="voto">
                                     <h4><strong>Voto: </strong></h4>
                                     <ul>
@@ -51,6 +81,34 @@
                                 </div>
                                 <div :class="showOverview" @click="show" class="overview" >
                                     <h4> <strong>Overview: </strong> <span>{{film.overview}}</span> </h4>
+                            
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div v-dragscroll id="catalogue__sect">
+                        <div @mouseleave="resetOverview" v-for="serie in series" v-if="serie.poster_path !== null" class="film__card">
+
+                            <div class="film__img cards">
+                                <img :src='"https://image.tmdb.org/t/p/w400/" + serie.poster_path' alt="">
+                            </div>
+
+                            <div class="film__data cards">
+                                <h3><strong>Titolo:</strong> {{serie.title || serie.name}}</h3>
+                                <h4><strong>Titolo originale:</strong> {{serie.original_title || serie.original_name}}</h4>
+                                <h4><strong>Lingua:</strong> {{serie.original_language}}</h4>
+                                <div class="voto">
+                                    <h4><strong>Voto: </strong></h4>
+                                    <ul>
+                                        <li v-for="index in serie.vote_average"><i class="fas fa-star"></i></li>
+                                        <li v-for="index in (5 - serie.vote_average)"><i class="far fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div :class="showOverview" @click="show" class="overview" >
+                                    <h4> <strong>Overview: </strong> <span>{{serie.overview}}</span> </h4>
                             
                                 </div>
                                 
