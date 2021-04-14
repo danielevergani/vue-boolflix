@@ -21,18 +21,16 @@
             <div class="container">
 
                 <header>
-                    <h1>
-                        BOOLFIX
-                    </h1>
+                    <img src="img/logo.png" alt="logo">
                     <div class="selector">
-                        <button class="" @click="showSection">più visti</button>
+                        <button :class="popularClass" @click="showSection">più visti</button>
                         <button :class="classActive" class="" @click="showSection">all</button>
                         <button :class="classActive" class="" @click="showSection">films</button>
                         <button :class="classActive" class="" @click="showSection">series</button>
                     </div>
                     <div id="search__sect">
                         <label for="search">Search</label>
-                        <input @keyup.13="search" v-model="searched"id="search" type="text">
+                        <input @keyup.13="search" v-model="searched" id="search" type="text">
                         <button @click="search" >Go!</button>
                     </div>
                 </header>

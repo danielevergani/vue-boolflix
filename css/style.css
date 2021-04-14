@@ -22,11 +22,6 @@ header{
     height: 80px;
 }
 
-h1{
-    color: 	#db0000;
-    font-size: 50px;
-}
-
 .selector button{
     background-color: grey;
     border-radius: 5px;
@@ -40,7 +35,41 @@ h1{
 }
 
 #search__sect{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: right;
     color: white;
+    width: 300px;
+}
+
+#search{
+    margin: 0px 10px;
+    background-color: black;
+    color: whitesmoke;
+    border: none;
+    border-bottom: 1px solid grey;
+    width: 0px;
+    transition: width 0.3s;
+}
+#search__sect label{
+    order: 1
+}
+
+#search__sect button{
+    order: -1;
+    background-color: #db0000;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#search__sect:hover #search{
+    width: 200px;
+}
+
+#search:focus{
+    width: 200px;
 }
 
 main{
@@ -60,6 +89,7 @@ main{
     width: 80%;
     margin: auto;
     margin-top: 50px;
+    margin-bottom: 20px;
     overflow-x: auto;
 }
 
