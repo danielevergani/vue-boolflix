@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="films" v-if="filmActive">
-                        <h3 class="title__section" v-if="mix.length !== 0" >I FILM</h3>
+                        <h3 class="title__section" v-if="films.length !== 0" >I FILM</h3>
                         <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
 
@@ -137,7 +137,7 @@
                     </div>
 
                     <div class="series" v-if="seriesActive">
-                        <h3 class="title__section" v-if="mix.length !== 0" >LE SERIE</h3>
+                        <h3 class="title__section" v-if="series.length !== 0" >LE SERIE</h3>
                         <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="serie in series" v-if="serie.poster_path !== null" class="film__card">
 
