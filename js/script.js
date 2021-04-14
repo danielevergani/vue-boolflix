@@ -10,6 +10,8 @@ var app = new Vue({
         allActive: false,
         filmActive: false,
         seriesActive: false,
+        popularActive: true,
+        classActive: "",
         flag:['en', 'it']
     }, 
     methods: {
@@ -18,6 +20,8 @@ var app = new Vue({
             this.allActive = true;
             this.filmActive = true;
             this.seriesActive = true;
+            this.popularActive = false;
+            this.classActive = "active"
             axios.get("https://api.themoviedb.org/3/search/movie?api_key=56e179e57d4a7222dddc19a32b9ea0ee", {
                 params:{
                     query: this.searched,
@@ -98,7 +102,17 @@ var app = new Vue({
                     this.filmActive = false;
                     console.log(this.filmActive);
                 }
-            } 
+            }
+            else if ( element.target.innerHTML == "più visti" ) {
+                if( element.target.classList =="active"){
+                    this.popularActive = true
+                    console.log(this.popularActive);
+                }
+                else{
+                    this.popularActive = false;
+                    console.log(this.popularActive);
+                }
+            }
             else{
                 if( element.target.classList =="active"){
                     this.seriesActive = true

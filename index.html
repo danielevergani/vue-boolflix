@@ -25,9 +25,10 @@
                         BOOLFIX
                     </h1>
                     <div class="selector">
-                        <button class="" @click="showSection">all</button>
-                        <button class="" @click="showSection">films</button>
-                        <button class="" @click="showSection">series</button>
+                        <button class="" @click="showSection">più visti</button>
+                        <button :class="classActive" class="" @click="showSection">all</button>
+                        <button :class="classActive" class="" @click="showSection">films</button>
+                        <button :class="classActive" class="" @click="showSection">series</button>
                     </div>
                     <div id="search__sect">
                         <label for="search">Search</label>
@@ -38,7 +39,7 @@
 
                 <main>
 
-                    <div class="popular">
+                    <div class="popular" v-if="popularActive">
                         <h3 class="title__section">I PIÙ VISTI</h3>
                         <div v-dragscroll class="catalogue__sect">
                             
@@ -73,7 +74,7 @@
                     </div>
 
                     <div class="all" v-if="allActive">
-                        <h3 class="title__section" >PER TE</h3>
+                        <h3 class="title__section" v-if="mix.length !== 0" >PER TE</h3>
                         <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="item in mix" v-if="item.poster_path !== null" class="film__card">
 
@@ -106,7 +107,7 @@
                     </div>
 
                     <div class="films" v-if="filmActive">
-                        <h3 class="title__section" >I FILM</h3>
+                        <h3 class="title__section" v-if="mix.length !== 0" >I FILM</h3>
                         <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
 
@@ -138,7 +139,7 @@
                     </div>
 
                     <div class="series" v-if="seriesActive">
-                        <h3 class="title__section" >LE SERIE</h3>
+                        <h3 class="title__section" v-if="mix.length !== 0" >LE SERIE</h3>
                         <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="serie in series" v-if="serie.poster_path !== null" class="film__card">
 
