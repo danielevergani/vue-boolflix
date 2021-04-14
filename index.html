@@ -5,6 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BoolFix</title>
+        <!-- google font -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <!-- end google font -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
         <!-- development version, includes helpful console warnings --> 
@@ -33,8 +37,44 @@
                 </header>
 
                 <main>
+
+                    <div class="popular">
+                        <h3 class="title__section">I PIÙ VISTI</h3>
+                        <div v-dragscroll class="catalogue__sect">
+                            
+                            <div @mouseleave="resetOverview" v-for="pop in popular" class="film__card">
+                                
+                                <div class="film__img cards">
+                                    <img :src='"https://image.tmdb.org/t/p/w400/" + pop.poster_path' alt="">
+                                </div>
+
+                                <div class="film__data cards">
+                                    <h3><strong>Titolo:</strong> {{pop.title || pop.name}}</h3>
+                                    <h4><strong>Titolo originale:</strong> {{pop.original_title || pop.original_name}}</h4>
+                                    <img class="flag" v-if="flag.includes(pop.original_language)":src="'img/' + pop.original_language + '.png'" alt="">
+                                    <h4 v-else="flag.includes(pop.original_language) == false"><strong>Lingua:</strong> {{pop.original_language}}</h4>
+
+                                    <div class="voto">
+                                        <h4><strong>Voto: </strong></h4>
+                                        <ul>
+                                            <li v-for="index in pop.vote_average"><i class="fas fa-star"></i></li>
+                                            <li v-for="index in (5 - pop.vote_average)"><i class="far fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div :class="showOverview" @click="show" class="overview" >
+                                        <h4> <strong>Overview: </strong> <span>{{pop.overview}}</span> </h4>
+                                
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div class="all" v-if="allActive">
-                        <div v-dragscroll id="catalogue__sect">
+                        <h3 class="title__section" >PER TE</h3>
+                        <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="item in mix" v-if="item.poster_path !== null" class="film__card">
 
                                 <div class="film__img cards">
@@ -66,7 +106,8 @@
                     </div>
 
                     <div class="films" v-if="filmActive">
-                        <div v-dragscroll id="catalogue__sect">
+                        <h3 class="title__section" >I FILM</h3>
+                        <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="film in films" v-if="film.poster_path !== null" class="film__card">
 
                                 <div class="film__img cards">
@@ -97,7 +138,8 @@
                     </div>
 
                     <div class="series" v-if="seriesActive">
-                        <div v-dragscroll id="catalogue__sect">
+                        <h3 class="title__section" >LE SERIE</h3>
+                        <div v-dragscroll class="catalogue__sect">
                             <div @mouseleave="resetOverview" v-for="serie in series" v-if="serie.poster_path !== null" class="film__card">
 
                                 <div class="film__img cards">

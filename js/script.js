@@ -4,6 +4,7 @@ var app = new Vue({
         mix:[],
         films: [],
         series:[],
+        popular:[],
         searched: "" ,
         showOverview: "overview__clamp",
         allActive: false,
@@ -14,6 +15,9 @@ var app = new Vue({
     methods: {
         search: function(){
             this.mix = [];
+            this.allActive = true;
+            this.filmActive = true;
+            this.seriesActive = true;
             axios.get("https://api.themoviedb.org/3/search/movie?api_key=56e179e57d4a7222dddc19a32b9ea0ee", {
                 params:{
                     query: this.searched,
@@ -42,6 +46,7 @@ var app = new Vue({
                     });
                 });
             });
+
             
 
             
@@ -107,9 +112,21 @@ var app = new Vue({
 
             
             
+        },
+        loadPopular: function(){
+            axios.get("https://api.themoviedb.org/3/movie/popular?api_key=56e179e57d4a7222dddc19a32b9ea0ee") 
+                
+            .then((response) =>{
+            this.popular = response.data.results;
+            this.voteModify(this.popular);
+            this.overviewNotAvailable(this.popular);
+        });
         }
         
 
+    },
+    mounted: function(){
+        this.loadPopular()
     }
     
 })
